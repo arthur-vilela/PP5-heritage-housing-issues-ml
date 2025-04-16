@@ -1,75 +1,73 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Predictive Analytics Project – Heritage Housing Issues
 
-## Template Instructions
+Lydia Doe, a fictional individual, inherited four houses in Ames, Iowa. She needs help estimating their market value and understanding what features influence house prices in that region.
 
-Welcome,
+## 1. Dataset Description *(to be completed after data exploration)*
 
-This is the Code Institute student template for the Data Analytics capstone project. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+> *This section will describe the*
+>
+> - *content*
+> - *structure*
+> - *key characteristics of the dataset.*
+>
+> *It will include a summary of*
+>
+> - *variables*
+> - *missing values*
+> - *basic descriptive statistics.*
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+---
 
-## How to use this repo
+## 2. Business Requirements
 
-1. Use this template to create your GitHub project repo. Click the Use this template button, then click Create a new repository.
+| Requirement ID | Business Requirement |
+|----------------|----------------------|
+| **BR1**        | The client is interested in discovering how house attributes correlate with the sale price. The client expects data visualisations of the correlated variables against the sale price. |
+| **BR2**        | The client is interested in predicting the house sale price from her four inherited houses, and any other house in Ames, Iowa. |
 
-1. Copy the URL of your repository to your clipboard.
+---
 
-1. In VS Code, select File - Open Folder.
+## 3. Hypotheses *(to be defined during data understanding)*
 
-1. Select your vscode-projects folder, then click the Select Folder button on Windows, or Open button on Mac.
+---
 
-1. From the top menu in VS Code, select Terminal > New Terminal to open the terminal.
+## 4. Mapping Business Requirements to ML Tasks and Dashboard
 
-1. In the terminal, type git clone followed by the URL of your GitHub repository. Then hit Enter. This command will download all the files in your GitHub repository into your vscode-projects folder.
+| Business Requirement | ML / Data Task                                               | Dashboard Feature                                 |
+|----------------------|--------------------------------------------------------------|--------------------------------------------------|
+| **BR1**              | Perform correlation analysis and feature exploration. Visualise top features that impact SalePrice. | “Data Insights” page with plots and explanations |
+| **BR2**              | Train and evaluate a regression model. Provide predictions based on user input.                     | “Predict Price” page with input form and prediction output |
 
-1. In VS Code, select File > Open Folder again.
+---
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click Select Folder.
+## 5. Business Case for the Machine Learning Task
 
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate from each other. You need to create your virtual environment, also called a venv, and then ensure that it is activated any time you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select Command Palette to open the VS Code command palette.
+Lydia Doe needs a reliable way to estimate housing prices in a region she is unfamiliar with. By training a machine learning model using historical housing data from Ames, Iowa, we can automate the valuation process and offer data-driven insights.
 
-1. In the command palette, type: create environment and select Python: Create Environment…
+This model will be used in a public-facing dashboard where users (like Lydia) can:
 
-1. Choose Venv from the dropdown list.
+- View how various attributes impact sale prices
+- Input custom values to get instant price predictions
 
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
+The goal is to build a solution that is both **accurate** and **interpretable**, making it accessible and valuable for non-technical users.
 
-1. DO NOT click the box next to requirements.txt, as you need to do more steps before you can install your dependencies. Click OK.
+---
 
-1. You will see a .venv folder appear in the file explorer pane to show that the virtual environment has been created.
+## 6. Model Objective, Metrics & Evaluation Strategy
 
-1. Important: Please add the .venv to your .gitignore file
+---
 
-1. Return to the terminal by clicking on the TERMINAL tab or click on the Terminal menu and choose New Terminal if no terminal is currently open.
+## 7. Dashboard Design *(to be developed as app pages are implemented)*
 
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
- `pip3 install -r requirements.txt`
+> *This section will outline the planned layout of the Streamlit dashboard, including navigation structure and page content.*
 
-1. Open the jupyter_notebooks directory, and click on the notebook you want to open.
+**Planned Pages:**
 
-1. Click the kernel button and choose Python Environments.
+- **Data Insights**  
+  *Visuals and explanations of key features that affect sale prices*
 
-Note that the kernel says Python 3.12.2 as it inherits from the workspace, so it will be Python-3.12.2 as installed by our template. To confirm this, you can use `! python --version` in a notebook code cell.
+- **Predict Price**  
+  *Interactive form where users can enter property details and receive predictions*
 
-## Cloud IDE Reminders
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
-
-* Set the runtime.txt Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
-
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+- **Project Summary**  
+  *Overview of objectives, methods, and findings*
