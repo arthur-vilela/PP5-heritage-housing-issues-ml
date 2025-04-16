@@ -4,17 +4,51 @@ Lydia Doe, a fictional individual, inherited four houses in Ames, Iowa. She need
 
 ## 1. Dataset Description *(to be completed after data exploration)*
 
-> *This section will describe the*
->
-> - *content*
-> - *structure*
-> - *key characteristics of the dataset.*
->
-> *It will include a summary of*
->
-> - *variables*
-> - *missing values*
-> - *basic descriptive statistics.*
+Here is a clean, markdown-formatted **Dataset Content** section based on your actual dataset and metadata. It's ready to be added to your `README.md` file.
+
+---
+
+## Dataset Content
+
+The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data) and contains historical housing data for properties in Ames, Iowa. We created a fictitious user story where predictive analytics can be applied in a real project scenario.
+
+Each row in the dataset represents a single house sale transaction, and each column contains a specific attribute related to the house's physical characteristics, condition, or sale details.
+
+The dataset includes information about:
+
+- Property characteristics such as size of living area, number of bedrooms above ground, basement size, and garage area
+- Condition and quality ratings such as overall material quality and kitchen quality
+- Construction features such as year built, year remodeled, and presence of porches or decks
+- Sale information such as the final selling price
+
+| Variable         | Meaning                                                        | Units/Values                                                                 |
+|------------------|----------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1stFlrSF          | First floor square footage                                     | Square feet (334–4692)                                                      |
+| 2ndFlrSF          | Second floor square footage                                    | Square feet (0–2065)                                                        |
+| BedroomAbvGr      | Bedrooms above ground (not including basement)                | Integer (0–8)                                                               |
+| BsmtExposure      | Exposure level of basement walls                              | Gd, Av, Mn, No, None                                                        |
+| BsmtFinSF1        | Finished basement area (Type 1)                                | Square feet (0–5644)                                                        |
+| BsmtUnfSF         | Unfinished basement area                                       | Square feet (0–2336)                                                        |
+| TotalBsmtSF       | Total basement area                                            | Square feet (0–6110)                                                        |
+| GarageArea        | Garage size                                                   | Square feet (0–1418)                                                        |
+| GarageFinish      | Garage interior finish                                        | Fin, RFn, Unf, None                                                         |
+| GarageYrBlt       | Year the garage was built                                     | Year (1900–2010)                                                            |
+| GrLivArea         | Above-grade living area                                       | Square feet (334–5642)                                                      |
+| KitchenQual       | Kitchen quality rating                                        | Ex, Gd, TA, Fa, Po                                                          |
+| LotArea           | Lot size                                                      | Square feet (1300–215245)                                                  |
+| LotFrontage       | Street frontage length                                        | Feet (21–313)                                                               |
+| MasVnrArea        | Masonry veneer area                                           | Square feet (0–1600)                                                        |
+| EnclosedPorch     | Enclosed porch area                                           | Square feet (0–286)                                                         |
+| OpenPorchSF       | Open porch area                                               | Square feet (0–547)                                                         |
+| OverallCond       | Overall condition of the house                                | 1 (Very Poor) to 10 (Very Excellent)                                        |
+| OverallQual       | Overall material and finish quality                           | 1 (Very Poor) to 10 (Very Excellent)                                        |
+| WoodDeckSF        | Wood deck area                                                | Square feet (0–736)                                                         |
+| YearBuilt         | Year the house was originally built                           | Year (1872–2010)                                                            |
+| YearRemodAdd      | Year the house was last remodeled                             | Year (1950–2010)                                                            |
+| SalePrice         | Final sale price of the property                              | USD (34900–755000)                                                          |
+
+This dataset provides sufficient structure and detail to build a machine learning model capable of predicting sale prices and to visualize how different attributes impact housing value in the Ames market.
+
 
 ---
 
