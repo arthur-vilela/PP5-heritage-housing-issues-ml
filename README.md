@@ -49,7 +49,6 @@ The dataset includes information about:
 
 This dataset provides sufficient structure and detail to build a machine learning model capable of predicting sale prices and to visualize how different attributes impact housing value in the Ames market.
 
-
 ---
 
 ## 2. Business Requirements
