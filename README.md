@@ -4,10 +4,6 @@ Lydia Doe, a fictional individual, inherited four houses in Ames, Iowa. She need
 
 ## 1. Dataset Description *(to be completed after data exploration)*
 
-Here is a clean, markdown-formatted **Dataset Content** section based on your actual dataset and metadata. It's ready to be added to your `README.md` file.
-
----
-
 ## Dataset Content
 
 The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data) and contains historical housing data for properties in Ames, Iowa. We created a fictitious user story where predictive analytics can be applied in a real project scenario.
