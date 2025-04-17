@@ -56,7 +56,17 @@ This dataset provides sufficient structure and detail to build a machine learnin
 
 ---
 
-## 3. Hypotheses *(to be defined during data understanding)*
+## 3. Hypotheses
+
+The following hypotheses were formed at the beginning of the project based on common assumptions in real estate and prior knowledge of the Ames housing dataset. These hypotheses will guide our exploratory analysis and help identify which features are most relevant for predicting house prices.
+
+| # | Hypothesis | Validation Method |
+|---|------------|--------------------|
+| 1 | Houses with higher overall quality tend to sell for more. | Correlation and scatter plot (`OverallQual` vs `SalePrice`) |
+| 2 | Larger above-ground living area leads to higher prices. | Correlation and scatter plot (`GrLivArea` vs `SalePrice`) |
+| 3 | Renovated homes command higher prices. | Group comparison: `YearBuilt` ≠ `YearRemodAdd` |
+| 4 | Finished basements increase house value. | Group analysis: `BsmtFinType1` vs `SalePrice` |
+| 5 | Garage size positively affects sale price. | Correlation and scatter plot (`GarageArea` vs `SalePrice`) |
 
 ---
 
@@ -88,15 +98,16 @@ The goal is to build a solution that is both **accurate** and **interpretable**,
 
 ## 7. Dashboard Design *(to be developed as app pages are implemented)*
 
-> *This section will outline the planned layout of the Streamlit dashboard, including navigation structure and page content.*
+The dashboard is designed to serve both non-technical stakeholders and technical users, and to clearly answer the business requirements. It is structured into four pages:
 
-**Planned Pages:**
+1. **Project Summary**  
+   Introduces the client story, project goals, and data source context.
 
-- **Data Insights**  
-  *Visuals and explanations of key features that affect sale prices*
+2. **Housing Data Insights**  
+   Answers Business Requirement 1 by showing how different property attributes correlate with sale price using visualizations and summary statistics.
 
-- **Predict Price**  
-  *Interactive form where users can enter property details and receive predictions*
+3. **Predict House Price**  
+   Answers Business Requirement 2 by allowing users to input property characteristics and receive an estimated sale price using the trained machine learning model.
 
-- **Project Summary**  
-  *Overview of objectives, methods, and findings*
+4. **Model Performance**  
+   Provides technical details and evaluation metrics for the regression model, such as R² score and error distributions, supporting transparency and reproducibility.
