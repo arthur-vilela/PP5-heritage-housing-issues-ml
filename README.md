@@ -17,31 +17,31 @@ The dataset includes information about:
 - Construction features such as year built, year remodeled, and presence of porches or decks
 - Sale information such as the final selling price
 
-| Variable         | Meaning                                                        | Units/Values                                                                 |
-|------------------|----------------------------------------------------------------|------------------------------------------------------------------------------|
-| 1stFlrSF          | First floor square footage                                     | Square feet (334–4692)                                                      |
-| 2ndFlrSF          | Second floor square footage                                    | Square feet (0–2065)                                                        |
-| BedroomAbvGr      | Bedrooms above ground (not including basement)                | Integer (0–8)                                                               |
-| BsmtExposure      | Exposure level of basement walls                              | Gd, Av, Mn, No, None                                                        |
-| BsmtFinSF1        | Finished basement area (Type 1)                                | Square feet (0–5644)                                                        |
-| BsmtUnfSF         | Unfinished basement area                                       | Square feet (0–2336)                                                        |
-| TotalBsmtSF       | Total basement area                                            | Square feet (0–6110)                                                        |
-| GarageArea        | Garage size                                                   | Square feet (0–1418)                                                        |
-| GarageFinish      | Garage interior finish                                        | Fin, RFn, Unf, None                                                         |
-| GarageYrBlt       | Year the garage was built                                     | Year (1900–2010)                                                            |
-| GrLivArea         | Above-grade living area                                       | Square feet (334–5642)                                                      |
-| KitchenQual       | Kitchen quality rating                                        | Ex, Gd, TA, Fa, Po                                                          |
-| LotArea           | Lot size                                                      | Square feet (1300–215245)                                                  |
-| LotFrontage       | Street frontage length                                        | Feet (21–313)                                                               |
-| MasVnrArea        | Masonry veneer area                                           | Square feet (0–1600)                                                        |
-| EnclosedPorch     | Enclosed porch area                                           | Square feet (0–286)                                                         |
-| OpenPorchSF       | Open porch area                                               | Square feet (0–547)                                                         |
-| OverallCond       | Overall condition of the house                                | 1 (Very Poor) to 10 (Very Excellent)                                        |
-| OverallQual       | Overall material and finish quality                           | 1 (Very Poor) to 10 (Very Excellent)                                        |
-| WoodDeckSF        | Wood deck area                                                | Square feet (0–736)                                                         |
-| YearBuilt         | Year the house was originally built                           | Year (1872–2010)                                                            |
-| YearRemodAdd      | Year the house was last remodeled                             | Year (1950–2010)                                                            |
-| SalePrice         | Final sale price of the property                              | USD (34900–755000)                                                          |
+| Variable          | Meaning                                          | Units/Values                                 |
+|-------------------|--------------------------------------------------|----------------------------------------------|
+| 1stFlrSF          | First floor square footage                       | Square feet (334–4692)                       |
+| 2ndFlrSF          | Second floor square footage                      | Square feet (0–2065)                         |
+| BedroomAbvGr      | Bedrooms above ground (not including basement)   | Integer (0–8)                                |
+| BsmtExposure      | Exposure level of basement walls                 | Gd, Av, Mn, No, None                         |
+| BsmtFinSF1        | Finished basement area (Type 1)                  | Square feet (0–5644)                         |
+| BsmtUnfSF         | Unfinished basement area                         | Square feet (0–2336)                         |
+| TotalBsmtSF       | Total basement area                              | Square feet (0–6110)                         |
+| GarageArea        | Garage size                                      | Square feet (0–1418)                         |
+| GarageFinish      | Garage interior finish                           | Fin, RFn, Unf, None                          |
+| GarageYrBlt       | Year the garage was built                        | Year (1900–2010)                             |
+| GrLivArea         | Above-grade living area                          | Square feet (334–5642)                       |
+| KitchenQual       | Kitchen quality rating                           | Ex, Gd, TA, Fa, Po                           |
+| LotArea           | Lot size                                         | Square feet (1300–215245)                    |
+| LotFrontage       | Street frontage length                           | Feet (21–313)                                |
+| MasVnrArea        | Masonry veneer area                              | Square feet (0–1600)                         |
+| EnclosedPorch     | Enclosed porch area                              | Square feet (0–286)                          |
+| OpenPorchSF       | Open porch area                                  | Square feet (0–547)                          |
+| OverallCond       | Overall condition of the house                   | 1 (Very Poor) to 10 (Very Excellent)         |
+| OverallQual       | Overall material and finish quality              | 1 (Very Poor) to 10 (Very Excellent)         |
+| WoodDeckSF        | Wood deck area                                   | Square feet (0–736)                          |
+| YearBuilt         | Year the house was originally built              | Year (1872–2010)                             |
+| YearRemodAdd      | Year the house was last remodeled                | Year (1950–2010)                             |
+| SalePrice         | Final sale price of the property                 | USD (34900–755000)                           |
 
 This dataset provides sufficient structure and detail to build a machine learning model capable of predicting sale prices and to visualize how different attributes impact housing value in the Ames market.
 
@@ -60,13 +60,13 @@ This dataset provides sufficient structure and detail to build a machine learnin
 
 The following hypotheses were formed at the beginning of the project based on common assumptions in real estate and prior knowledge of the Ames housing dataset. These hypotheses will guide our exploratory analysis and help identify which features are most relevant for predicting house prices.
 
-| # | Hypothesis | Validation Method |
-|---|------------|--------------------|
+| # | Hypothesis                                                | Validation Method                                           |
+|---|-----------------------------------------------------------|-------------------------------------------------------------|
 | 1 | Houses with higher overall quality tend to sell for more. | Correlation and scatter plot (`OverallQual` vs `SalePrice`) |
-| 2 | Larger above-ground living area leads to higher prices. | Correlation and scatter plot (`GrLivArea` vs `SalePrice`) |
-| 3 | Renovated homes command higher prices. | Group comparison: `YearBuilt` ≠ `YearRemodAdd` |
-| 4 | Finished basements increase house value. | Group analysis: `BsmtFinType1` vs `SalePrice` |
-| 5 | Garage size positively affects sale price. | Correlation and scatter plot (`GarageArea` vs `SalePrice`) |
+| 2 | Larger above-ground living area leads to higher prices.   | Correlation and scatter plot (`GrLivArea` vs `SalePrice`)   |
+| 3 | Renovated homes command higher prices.                    | Group comparison: `YearBuilt` ≠ `YearRemodAdd`              |
+| 4 | Finished basements increase house value.                  | Group analysis: `BsmtFinType1` vs `SalePrice`               |
+| 5 | Garage size positively affects sale price.                | Correlation and scatter plot (`GarageArea` vs `SalePrice`)  |
 
 ---
 
