@@ -70,6 +70,22 @@ The following hypotheses were formed at the beginning of the project based on co
 
 ---
 
+### The Rationale to Map the Business Requirements to the Data Visualizations and ML Tasks
+
+- **Business Requirement 1: Data Visualization and Correlation Study**  
+  - We will analyze the relationship between key house attributes and the final sale price.  
+  - We will use correlation techniques (e.g., Pearson correlation) to identify the variables most strongly related to `SalePrice`.  
+  - We will visualize the relationship between `SalePrice` and high-impact features such as `GrLivArea`, `OverallQual`, `GarageArea`, and others using scatter plots, box plots, and a correlation heatmap.  
+  - We will use these insights to help the client (Lydia) better understand what features influence housing value and to support later feature selection for modeling.
+
+- **Business Requirement 2: Regression Modeling and Prediction Interface**  
+  - We will train a supervised regression model using selected numerical and categorical house attributes to predict the final sale price of a property.  
+  - The model will be integrated into the Streamlit app, allowing the client to input property characteristics and receive a predicted sale price.  
+  - We will evaluate the model's performance using regression metrics (R², MAE, RMSE) and ensure the output is interpretable and practically useful.  
+  - This prediction tool will help Lydia estimate the value of her inherited properties and potential future acquisitions in Ames, Iowa.
+
+---
+
 ## 4. Mapping Business Requirements to ML Tasks and Dashboard
 
 | Business Requirement | ML / Data Task                                               | Dashboard Feature                                 |
