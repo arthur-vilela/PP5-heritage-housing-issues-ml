@@ -88,8 +88,8 @@ The following hypotheses were formed at the beginning of the project based on co
 
 ## 4. Mapping Business Requirements to ML Tasks and Dashboard
 
-| Business Requirement | ML / Data Task                                               | Dashboard Feature                                 |
-|----------------------|--------------------------------------------------------------|--------------------------------------------------|
+| Business Requirement | ML / Data Task              | Dashboard Feature        |
+|----------------------|-----------------------------|--------------------------|
 | **BR1**              | Perform correlation analysis and feature exploration. Visualise top features that impact SalePrice. | “Data Insights” page with plots and explanations |
 | **BR2**              | Train and evaluate a regression model. Provide predictions based on user input.                     | “Predict Price” page with input form and prediction output |
 
