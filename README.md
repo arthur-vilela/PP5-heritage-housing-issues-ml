@@ -106,6 +106,19 @@ This model will be used in a public-facing dashboard where users (like Lydia) ca
 
 The goal is to build a solution that is both **accurate** and **interpretable**, making it accessible and valuable for non-technical users.
 
+### Machine Learning Task Components
+
+- **Aim:** Predict housing sale prices in Ames, Iowa, based on property attributes.
+- **Learning Method:** Supervised regression using algorithms like Linear Regression or Random Forest.
+- **Ideal Outcome:** A model that achieves strong predictive performance (R² ≥ 0.85) and is interpretable enough to provide trust in its estimates.
+- **Success Metrics:**
+  - R² Score (target: ≥ 0.85)
+  - MAE and RMSE for error analysis
+  - Visual Actual vs Predicted plots
+- **Model Output:** SalePrice estimate for a house based on its features.
+- **User Relevance:** Lydia can input house characteristics into the dashboard and receive an estimated market value.
+- **Heuristics and Training Data:** The model was trained on a curated dataset from Ames, Iowa, publicly available on Kaggle, after undergoing thorough cleaning and feature engineering.
+
 ---
 
 ## 6. Model Objective, Metrics & Evaluation Strategy
@@ -117,13 +130,22 @@ The goal is to build a solution that is both **accurate** and **interpretable**,
 The dashboard is designed to serve both non-technical stakeholders and technical users, and to clearly answer the business requirements. It is structured into four pages:
 
 1. **Project Summary**  
-   Introduces the client story, project goals, and data source context.
+   - Text explanation of the client's story and project context and goals.
+   - Purpose: Inform users of the problem and solution scope.
 
-2. **Housing Data Insights**  
+2. **Housing Data Insights**  *(Answers BR1)*
    Answers Business Requirement 1 by showing how different property attributes correlate with sale price using visualizations and summary statistics.
+   - Correlation heatmaps, scatter plots, boxplots.
+   - Summary of top features influencing SalePrice.
+   - Plot interpretations included.
 
-3. **Predict House Price**  
-   Answers Business Requirement 2 by allowing users to input property characteristics and receive an estimated sale price using the trained machine learning model.
+3. **Predict House Price**  *(Answers BR2)*
+   Allows users to input property characteristics and receive an estimated sale price using the trained machine learning model.
+   - Interactive form for inputting house attributes.
+   - Displays model-predicted sale price.
 
 4. **Model Performance**  
    Provides technical details and evaluation metrics for the regression model, such as R² score and error distributions, supporting transparency and reproducibility.
+   - Actual vs Predicted plots (Train/Test)
+   - R², MAE, RMSE metrics
+   - Summary stating if the model met the performance criteria.
