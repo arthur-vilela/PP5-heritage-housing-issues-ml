@@ -25,14 +25,27 @@ page = st.sidebar.radio("Go to", ["Project Summary", "Housing Insights", "Predic
 if page == "Project Summary":
     st.header("Project Summary")
     st.markdown("""
-    Lydia Doe inherited four houses in Ames, Iowa. She needs help estimating their market value and understanding 
-    which features influence sale price the most.
+    Lydia Doe inherited four houses in **Ames, Iowa** and needs help estimating their market value.  
+    This project applies **predictive analytics** to assist her in understanding **what features influence house prices** and provide reliable predictions.
 
-    This dashboard is designed to:
-    - Visualize which housing attributes most impact price (BR1)
-    - Allow users to input property info and get an instant price prediction (BR2)
+    ### Business Requirements:
+    - **BR1**: Discover how house attributes correlate with the sale price  
+    - **BR2**: Predict the sale price of her four inherited houses (and others)
 
-    Built with a machine learning model trained on historical housing data.
+    ### Solution Overview:
+    - Used a historical housing dataset from [Ames, Iowa](https://www.kaggle.com/codeinstitute/housing-prices-data)
+    - Built several regression models and selected the best one using **GridSearchCV**
+    - Final model: `ExtraTreesRegressor` (R² score ≈ 0.844 on test set)
+
+    ### Dataset Details:
+    - ~1,460 housing records with 20+ features
+    - Features include:
+        - Square footage (e.g., `GrLivArea`, `TotalBsmtSF`)
+        - Quality and condition (e.g., `OverallQual`, `KitchenQual`)
+        - Basement and garage features
+        - Sale price as the target
+
+    Navigate through the sidebar to explore the **top predictors**, try the **price prediction tool**, and view **model performance**.
     """)
 
 # === 2. Housing Insights Page ===
