@@ -51,6 +51,16 @@ if page == "Project Summary":
 # === 2. Housing Insights Page ===
 elif page == "Housing Insights":
     st.header("Feature Importance")
+    st.subheader("🔍 Top Predictors of House Price")
+    st.markdown("""
+    This page answers **Business Requirement 1 (BR1)**:  
+    > _"Discover how house attributes correlate with the sale price."_
+
+    The model identifies the most influential features in predicting a house's sale price in Ames, Iowa.  
+    These are shown based on the **feature importance** values from the trained regression model.
+
+    Higher importance means the model relied more on that feature when making predictions.
+    """)
     st.image(f"{path}/feature_importance_top5.png", caption="Top 5 Most Important Features")
 
     st.markdown("These are the features that most influenced the model’s predictions:")
@@ -59,43 +69,68 @@ elif page == "Housing Insights":
 # === 3. Predict Price Page ===
 elif page == "Predict Price":
     st.header("Predict House Sale Price")
-    st.markdown("Fill in the property details below:")
+    st.subheader("📦 Estimate the Sale Price of a Property")
 
-    # Feature mapping for categorical variables (used in encoding step)
-    mappings = {
-        'KitchenQual': {'Ex': 4, 'Gd': 3, 'TA': 2, 'Fa': 1, 'Po': 0},
-        'GarageFinish': {'Fin': 2, 'RFn': 1, 'Unf': 0, 'None': -1},
-        'BsmtExposure': {'Gd': 3, 'Av': 2, 'Mn': 1, 'No': 0, 'None': -1},
-        'BsmtFinType1': {'GLQ': 6, 'ALQ': 5, 'BLQ': 4, 'Rec': 3, 'LwQ': 2, 'Unf': 1, 'None': -1}
-    }
+    st.markdown("""
+    This tool answers **Business Requirement 2 (BR2)**:  
+    > _"Predict the sale price of the client’s inherited houses."_
 
-    # Create dictionary to hold input values
-    input_data = {}
+    The model used here is based on an **ExtraTreesRegressor**, trained using the top 5 most predictive features.
+    """)
 
-    for feature in features:
-        if feature in mappings:
-            # Show dropdown with labels
-            options = list(mappings[feature].keys())
-            selected_label = st.selectbox(f"{feature}", options)
-            input_data[feature] = mappings[feature][selected_label]
-        else:
-            # Show numeric input
-            input_data[feature] = st.number_input(label=f"{feature}", step=1.0)
+    st.markdown("---")
 
-    # Predict button
+    # 🔧 Collect user input
+    GrLivArea = st.number_input("Above-Ground Living Area (GrLivArea) [sq ft]", min_value=0, value=1500)
+    OverallQual = st.selectbox("Overall Quality (OverallQual) [1 = Very Poor, 10 = Excellent]", options=list(range(1, 11)), index=5)
+    GarageArea = st.number_input("Garage Area (GarageArea) [sq ft]", min_value=0, value=400)
+    TotalBsmtSF = st.number_input("Total Basement Area (TotalBsmtSF) [sq ft]", min_value=0, value=800)
+    YearRemodAdd = st.number_input("Remodel Year (YearRemodAdd)", min_value=1950, max_value=2025, value=2005)
+
+    # 🧠 Predict button
     if st.button("Predict"):
-        input_df = pd.DataFrame([input_data])
+        input_df = pd.DataFrame([{
+            "GrLivArea": GrLivArea,
+            "OverallQual": OverallQual,
+            "GarageArea": GarageArea,
+            "TotalBsmtSF": TotalBsmtSF,
+            "YearRemodAdd": YearRemodAdd
+        }])
 
-        if input_df.isnull().any().any():
-            st.error("Please fill in all fields to make a prediction.")
-        else:
-            prediction = pipeline.predict(input_df)[0]
-            st.success(f"🏷️ Estimated Sale Price: ${round(prediction, 2):,}")
+        # Make prediction
+        prediction = pipeline.predict(input_df)[0]
+
+        st.markdown("### 🎯 Estimated Sale Price:")
+        st.success(f"🏷️ **US${round(prediction, 2):,}**")
+
+        # 📄 Download prediction as CSV
+        input_df["PredictedPrice"] = prediction
+        csv = input_df.to_csv(index=False).encode("utf-8")
+
+        st.download_button(
+            label="⬇️ Download Prediction as CSV",
+            data=csv,
+            file_name="house_price_prediction.csv",
+            mime="text/csv"
+        )
 
 
 # === 4. Model Performance Page ===
 elif page == "Model Performance":
     st.header("Model Evaluation Metrics")
+    st.markdown("""
+    This page supports **Business Requirement 2 (BR2)**:  
+    > _"Predict the sale price of the client’s inherited houses."_
+
+    The model used is `ExtraTreesRegressor`, trained using GridSearchCV and selected for its high performance.
+
+    ### Evaluation Metrics:
+    - **R² (R-squared)**: How much variance in SalePrice is explained by the model
+    - **MAE**: Mean Absolute Error – average prediction error
+    - **RMSE**: Root Mean Squared Error – penalizes larger errors more heavily
+
+    These scores are reported on both the **training** and **test** datasets to assess generalization.
+    """)
 
     col1, col2 = st.columns(2)
 
