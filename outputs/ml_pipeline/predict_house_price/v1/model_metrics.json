@@ -1,8 +1,34 @@
 {
-    "R2_train": 0.935,
-    "MAE_train": 13638.222,
-    "RMSE_train": 19989.879,
-    "R2_test": 0.844,
-    "MAE_test": 19952.237,
-    "RMSE_test": 32820.665
+    "train": {
+        "r2": 0.935,
+        "mae": 13638.222,
+        "rmse": 19989.879
+    },
+    "test": {
+        "r2": 0.844,
+        "mae": 19952.237,
+        "rmse": 32820.665
+    },
+    "feature_importance": [
+        {
+            "Feature": "OverallQual",
+            "Importance": 0.4668934120802686
+        },
+        {
+            "Feature": "GrLivArea",
+            "Importance": 0.21403073769180994
+        },
+        {
+            "Feature": "GarageArea",
+            "Importance": 0.12132120803848051
+        },
+        {
+            "Feature": "YearRemodAdd",
+            "Importance": 0.10759622329962566
+        },
+        {
+            "Feature": "TotalBsmtSF",
+            "Importance": 0.09015841888981518
+        }
+    ]
 }
