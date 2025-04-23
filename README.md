@@ -318,8 +318,6 @@ Ensure you have the following installed:
    Streamlit will automatically open the app in your default browser.  
    If not, follow the local URL provided in the terminal (usually `http://localhost:8501`).
 
----
-
 #### Common Issues
 
 - **Command not found error**: Ensure you are inside the correct folder and have activated the virtual environment.
@@ -328,4 +326,60 @@ Ensure you have the following installed:
   ```bash
   streamlit run app.py --server.port 8502
   ```
-  
+
+---
+
+Here's a suggested **Bugs and Troubleshooting** section for your README, based on the screenshots you provided and issues discussed during the project. I also suggested descriptive filenames and good file paths for project organization.
+
+---
+
+## Bugs and Troubleshooting
+
+During the development of the feature engineering, modeling, and dashboard components, the following challenges were encountered and resolved. These are documented here for transparency and learning purposes.
+
+### ValueError: Could Not Convert String to Float
+
+![ValueError: Could Not Convert String to Float](docs\valueerror-string-to-float-correlation.png)  
+**Context:** While computing Pearson correlation, an error was raised due to string values (e.g., 'GLQ') in non-numeric columns.  
+**Fix:** Ensure all columns passed to `.corr()` are numeric by either encoding or dropping object-type columns first.
+
+---
+
+### ModuleNotFoundError: `pkg_resources` Not Found
+
+![ModuleNotFoundError: pkg_resources Not Found](docs\module-not-found-ppscore.png)
+
+**Context:** The `pkg_resources` was installed in the virtual environment where I ran the previous notebooks. So even when the selected kernel was `Python 3.12.8` and not the `venv`, the terminal would indicate that the module was already installed when running `pip install ppscore`.  
+**Fix:** Change the notebooks' kernel to the virtual environment previously created.
+
+---
+
+### Input Array Must Be 1 Dimensional
+
+![Input Array Must Be 1 Dimensional](docs\valueerror-arbitrary-discretiser-dimensions.png)  
+**Context:** When applying `ArbitraryDiscretiser` to multiple columns, the transformer expected a 1D array.  
+**Fix:** Apply the discretiser to a single column at a time or reshape the input correctly.
+
+---
+
+### Mime Type Rendering Requires IPython
+
+![Mime Type Rendering Requires IPython](docs\plotly-parallel-categories-render-error.png)  
+**Context:** Attempting to display Plotly plots in a Jupyter environment without proper renderer configuration.  
+**Fix:** Set `pio.renderers.default = "notebook_connected"` or `"browser"` as fallback in notebooks.
+
+---
+
+### SmartCorrelatedSelection – Missing Value Error
+
+![SmartCorrelatedSelection – Missing Value Error](docs\smartcorrelatedselection-nan-error.png)  
+**Context:** Running the modeling pipeline without ensuring all missing values were handled.  
+**Fix:** Double-check that imputation steps occur before correlation or modeling steps.
+
+---
+
+### Dashboard Prediction – Duplicate Inputs and CSV Button Missing
+
+![Dashboard Prediction – Duplicate Inputs and CSV Button Missing](docs/reports/screenshots/streamlit-duplicate-inputs-download-missing.png)  
+**Context:** In the "Predict Price" dashboard page, duplicate inputs appeared, and the download button was visible even before prediction.  
+**Fix:** Use `st.session_state` or conditional blocks to ensure buttons and output appear only after valid input and prediction.

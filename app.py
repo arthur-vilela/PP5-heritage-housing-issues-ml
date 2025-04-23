@@ -80,14 +80,14 @@ elif page == "Predict Price":
 
     st.markdown("---")
 
-    # 🔧 Collect user input
+    # Collect user input
     GrLivArea = st.number_input("Above-Ground Living Area (GrLivArea) [sq ft]", min_value=0, value=1500)
     OverallQual = st.selectbox("Overall Quality (OverallQual) [1 = Very Poor, 10 = Excellent]", options=list(range(1, 11)), index=5)
     GarageArea = st.number_input("Garage Area (GarageArea) [sq ft]", min_value=0, value=400)
     TotalBsmtSF = st.number_input("Total Basement Area (TotalBsmtSF) [sq ft]", min_value=0, value=800)
     YearRemodAdd = st.number_input("Remodel Year (YearRemodAdd)", min_value=1950, max_value=2025, value=2005)
 
-    # 🧠 Predict button
+    # Predict button
     if st.button("Predict"):
         input_df = pd.DataFrame([{
             "GrLivArea": GrLivArea,
@@ -100,10 +100,10 @@ elif page == "Predict Price":
         # Make prediction
         prediction = pipeline.predict(input_df)[0]
 
-        st.markdown("### 🎯 Estimated Sale Price:")
+        st.markdown("### Estimated Sale Price:")
         st.success(f"🏷️ **US${round(prediction, 2):,}**")
 
-        # 📄 Download prediction as CSV
+        # Download prediction as CSV
         input_df["PredictedPrice"] = prediction
         csv = input_df.to_csv(index=False).encode("utf-8")
 
