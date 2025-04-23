@@ -1,9 +1,11 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import joblib
 import json
 import matplotlib.pyplot as plt
 from pathlib import Path
+
 
 # === Load artifacts ===
 version = "v1"
@@ -109,7 +111,29 @@ elif page == "Housing Insights":
     with st.expander("Pandas Profile Report"):
         st.write("The dataset was analyzed using Pandas Profiling, which provides insights into the data distribution, correlations, and missing values.")
         st.markdown("The report is available for download:")
-        st.markdown("[View Train Set Report](outputs/reports/data_profile_report.html)", unsafe_allow_html=True)
+
+        with open("outputs/reports/data_profile_report.pdf", "rb") as file:
+            btn = st.download_button(
+                label="📥 Download Pandas Profiling Report in PDF",
+                data=file,
+                file_name="pandas_profiling.pdf",
+                mime="application/pdf"
+            )
+
+        with open("outputs/reports/data_profile_report.html", "rb") as file:
+            btn = st.download_button(
+                label="📥 Download Pandas Profiling Report in HTML",
+                data=file,
+                file_name="data_profile_report.html",
+                mime="text/html"
+            )
+        
+        with open("outputs/reports/data_profile_report.html",'r') as f: 
+            html_data = f.read()
+
+            # Show in webpage
+            st.header("Pandas Profiling Report")
+            st.components.v1.html(html_data, height=800, scrolling=True)
 
     with st.expander("Key Features"):
         st.write("""
