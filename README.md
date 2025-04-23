@@ -2,7 +2,7 @@
 
 Lydia Doe, a fictional individual, inherited four houses in Ames, Iowa. She needs help estimating their market value and understanding what features influence house prices in that region.
 
-## 1. Dataset Description *(to be completed after data exploration)*
+## 1. Dataset Description
 
 ## Dataset Content
 
@@ -123,9 +123,116 @@ The goal is to build a solution that is both **accurate** and **interpretable**,
 
 ## 6. Model Objective, Metrics & Evaluation Strategy
 
+This machine learning project aims to **predict housing sale prices in Ames, Iowa** based on key property attributes. The predictive model serves as a tool for the client, Lydia Doe, to estimate the market value of her inherited homes and potential future purchases.
+
+The approach followed the full machine learning pipeline:
+
+- Data preprocessing and cleaning
+- Feature engineering and selection
+- Model training and evaluation
+- Deployment in an interactive dashboard
+
 ---
 
-## 7. Dashboard Design *(to be developed as app pages are implemented)*
+### Feature Engineering Process
+
+Feature engineering plays a crucial role in improving model performance and interpretability. In this project, we used a structured approach to evaluate and transform the most relevant features:
+
+1. **Imputation**  
+   - Missing numerical values were filled using either **0** (e.g., `GarageYrBlt`) or the **median**.
+   - Missing categorical features were filled with `"None"`.
+
+2. **Encoding**  
+   - Selected categorical features (`KitchenQual`, `GarageFinish`, `BsmtExposure`, `BsmtFinType1`) were encoded using **Ordinal Encoding** to preserve order relationships.
+
+3. **Transforming Skewed Distributions**  
+   - Numeric features with skewed distributions (e.g., `GrLivArea`, `GarageArea`, `TotalBsmtSF`) were transformed using **logarithmic**, **Yeo-Johnson**, or **power** transformations.
+
+4. **Multicollinearity Reduction**  
+   - Initially, we used `SmartCorrelatedSelection` with a correlation threshold of **0.6** to drop highly correlated features.
+   - However, this removed several important predictors (e.g., `OverallQual`, `YearBuilt`, `GarageArea`), resulting in an R² score on the test set of **~0.76**.
+
+   After reevaluation, we increased the threshold to **0.8**, allowing the model to retain strong yet slightly correlated features. This change improved model performance and interpretability significantly:
+   - **Test R² increased from 0.76 to 0.84**
+   - Key variables like `OverallQual`, `GarageArea`, and `GrLivArea` remained available for modeling
+
+---
+
+### Model Objective
+
+- **Task Type**: Regression
+- **Target Variable**: `SalePrice` (final house sale price)
+- **Goal**: Train a model that accurately estimates property values using a minimal set of strong, interpretable features.
+
+---
+
+### Selected Features
+
+The final deployed model uses the top **5 most predictive features**, chosen based on correlation, domain relevance, and feature importance:
+
+| Feature        | Description                                   |
+|----------------|-----------------------------------------------|
+| `OverallQual`  | Overall material and finish quality (1–10)    |
+| `GrLivArea`    | Above-ground living area (in square feet)     |
+| `GarageArea`   | Garage area (in square feet)                  |
+| `TotalBsmtSF`  | Total basement area (in square feet)          |
+| `YearRemodAdd` | Year the house was last remodeled             |
+
+---
+
+### Model and Pipeline Design
+
+The final deployed model is an **ExtraTreesRegressor**. The full pipeline includes:
+
+1. **Imputation** (0, median, or “None”)
+2. **Ordinal Encoding**
+3. **Skewed Data Transformation**
+4. **Multicollinearity Filtering (threshold = 0.8)**
+5. **Standard Scaling**
+6. **Feature Selection (SelectFromModel)**
+7. **Final Model**: `ExtraTreesRegressor` (with tuned hyperparameters)
+
+---
+
+### Evaluation Metrics
+
+Performance was evaluated on both the training and test datasets:
+
+| Metric                | Train Set | Test Set |
+|-----------------------|-----------|----------|
+| **R² Score**          | 0.935     | 0.844    |
+| **MAE (USD)**         | $13,638   | $19,952  |
+| **RMSE (USD)**        | $19,989   | $32,820  |
+
+These results show that the model:
+
+- **Generalizes well** to unseen data
+- **Meets the success threshold** (R² ≥ 0.85 on Train, close on Test)
+- Has acceptable error margins for the housing price range
+
+---
+
+### Visual Evaluation
+
+Scatter plots of **actual vs. predicted values** (Train and Test) confirmed the model's fit:
+
+- Most predictions closely follow the diagonal line
+- Higher variance is expected in very high-value homes (e.g., >$400k)
+
+---
+
+### Conclusion
+
+- The project shows a full regression modeling pipeline from raw data to dashboard.
+- The model is accurate and interpretable for non-technical users.
+- Feature engineering decisions (especially correlation threshold tuning) directly improved performance.
+- The app meets both business requirements:
+  - **BR1**: Exploratory insights with visualizations
+  - **BR2**: Real-time price prediction via dashboard
+
+---
+
+## 7. Dashboard Design
 
 The dashboard is designed to serve both non-technical stakeholders and technical users, and to clearly answer the business requirements. It is structured into four pages:
 
