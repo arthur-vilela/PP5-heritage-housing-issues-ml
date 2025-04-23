@@ -2,9 +2,7 @@
 
 Lydia Doe, a fictional individual, inherited four houses in Ames, Iowa. She needs help estimating their market value and understanding what features influence house prices in that region.
 
-## 1. Dataset Description
-
-## Dataset Content
+## Dataset Description
 
 The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data) and contains historical housing data for properties in Ames, Iowa. We created a fictitious user story where predictive analytics can be applied in a real project scenario.
 
@@ -47,7 +45,7 @@ This dataset provides sufficient structure and detail to build a machine learnin
 
 ---
 
-## 2. Business Requirements
+## Business Requirements
 
 | Requirement ID | Business Requirement |
 |----------------|----------------------|
@@ -56,7 +54,7 @@ This dataset provides sufficient structure and detail to build a machine learnin
 
 ---
 
-## 3. Hypotheses
+## Hypotheses
 
 The following hypotheses were formed at the beginning of the project based on common assumptions in real estate and prior knowledge of the Ames housing dataset. These hypotheses will guide our exploratory analysis and help identify which features are most relevant for predicting house prices.
 
@@ -69,6 +67,13 @@ The following hypotheses were formed at the beginning of the project based on co
 | 5 | Garage size positively affects sale price.                | Correlation and scatter plot (`GarageArea` vs `SalePrice`)  |
 
 ---
+
+## Mapping Business Requirements to ML Tasks and Dashboard
+
+| Business Requirement | ML / Data Task              | Dashboard Feature        |
+|----------------------|-----------------------------|--------------------------|
+| **BR1**              | Perform correlation analysis and feature exploration. Visualise top features that impact SalePrice. | “Data Insights” page with plots and explanations |
+| **BR2**              | Train and evaluate a regression model. Provide predictions based on user input.                     | “Predict Price” page with input form and prediction output |
 
 ### The Rationale to Map the Business Requirements to the Data Visualizations and ML Tasks
 
@@ -86,16 +91,7 @@ The following hypotheses were formed at the beginning of the project based on co
 
 ---
 
-## 4. Mapping Business Requirements to ML Tasks and Dashboard
-
-| Business Requirement | ML / Data Task              | Dashboard Feature        |
-|----------------------|-----------------------------|--------------------------|
-| **BR1**              | Perform correlation analysis and feature exploration. Visualise top features that impact SalePrice. | “Data Insights” page with plots and explanations |
-| **BR2**              | Train and evaluate a regression model. Provide predictions based on user input.                     | “Predict Price” page with input form and prediction output |
-
----
-
-## 5. Business Case for the Machine Learning Task
+## Business Case for the Machine Learning Task
 
 Lydia Doe needs a reliable way to estimate housing prices in a region she is unfamiliar with. By training a machine learning model using historical housing data from Ames, Iowa, we can automate the valuation process and offer data-driven insights.
 
@@ -121,7 +117,7 @@ The goal is to build a solution that is both **accurate** and **interpretable**,
 
 ---
 
-## 6. Model Objective, Metrics & Evaluation Strategy
+## Model Objective, Metrics & Evaluation Strategy
 
 This machine learning project aims to **predict housing sale prices in Ames, Iowa** based on key property attributes. The predictive model serves as a tool for the client, Lydia Doe, to estimate the market value of her inherited homes and potential future purchases.
 
@@ -131,8 +127,6 @@ The approach followed the full machine learning pipeline:
 - Feature engineering and selection
 - Model training and evaluation
 - Deployment in an interactive dashboard
-
----
 
 ### Feature Engineering Process
 
@@ -156,15 +150,11 @@ Feature engineering plays a crucial role in improving model performance and inte
    - **Test R² increased from 0.76 to 0.84**
    - Key variables like `OverallQual`, `GarageArea`, and `GrLivArea` remained available for modeling
 
----
-
 ### Model Objective
 
 - **Task Type**: Regression
 - **Target Variable**: `SalePrice` (final house sale price)
 - **Goal**: Train a model that accurately estimates property values using a minimal set of strong, interpretable features.
-
----
 
 ### Selected Features
 
@@ -178,8 +168,6 @@ The final deployed model uses the top **5 most predictive features**, chosen bas
 | `TotalBsmtSF`  | Total basement area (in square feet)          |
 | `YearRemodAdd` | Year the house was last remodeled             |
 
----
-
 ### Model and Pipeline Design
 
 The final deployed model is an **ExtraTreesRegressor**. The full pipeline includes:
@@ -191,8 +179,6 @@ The final deployed model is an **ExtraTreesRegressor**. The full pipeline includ
 5. **Standard Scaling**
 6. **Feature Selection (SelectFromModel)**
 7. **Final Model**: `ExtraTreesRegressor` (with tuned hyperparameters)
-
----
 
 ### Evaluation Metrics
 
@@ -210,16 +196,12 @@ These results show that the model:
 - **Meets the success threshold** (R² ≥ 0.85 on Train, close on Test)
 - Has acceptable error margins for the housing price range
 
----
-
 ### Visual Evaluation
 
 Scatter plots of **actual vs. predicted values** (Train and Test) confirmed the model's fit:
 
 - Most predictions closely follow the diagonal line
 - Higher variance is expected in very high-value homes (e.g., >$400k)
-
----
 
 ### Conclusion
 
@@ -232,27 +214,118 @@ Scatter plots of **actual vs. predicted values** (Train and Test) confirmed the 
 
 ---
 
-## 7. Dashboard Design
+## Dashboard Design
 
-The dashboard is designed to serve both non-technical stakeholders and technical users, and to clearly answer the business requirements. It is structured into four pages:
+The Streamlit dashboard serves both non-technical users (like Lydia, the fictional client) and technical reviewers by delivering a clear and interactive interface that satisfies both business requirements. It is structured into four well-defined pages, each with a focused purpose:
 
-1. **Project Summary**  
-   - Text explanation of the client's story and project context and goals.
-   - Purpose: Inform users of the problem and solution scope.
+### 1. Project Summary (Home Page)
 
-2. **Housing Data Insights**  *(Answers BR1)*
-   Answers Business Requirement 1 by showing how different property attributes correlate with sale price using visualizations and summary statistics.
-   - Correlation heatmaps, scatter plots, boxplots.
-   - Summary of top features influencing SalePrice.
-   - Plot interpretations included.
+- Introduces Lydia's story and the motivation for the project.
+- Explains the goals, data source, and how predictive analytics can help estimate house prices.
+- Includes markdown-based summaries of:
+  - Business Requirements (BR1 and BR2)
+  - The predictive modeling approach
+  - Tools and techniques used
 
-3. **Predict House Price**  *(Answers BR2)*
-   Allows users to input property characteristics and receive an estimated sale price using the trained machine learning model.
-   - Interactive form for inputting house attributes.
-   - Displays model-predicted sale price.
+### 2. Housing Data Insights (Answers BR1)
 
-4. **Model Performance**  
-   Provides technical details and evaluation metrics for the regression model, such as R² score and error distributions, supporting transparency and reproducibility.
-   - Actual vs Predicted plots (Train/Test)
-   - R², MAE, RMSE metrics
-   - Summary stating if the model met the performance criteria.
+This page provides exploratory data analysis (EDA) and visual insights into what influences house prices.
+
+- Correlation Heatmap
+  - Displays Pearson correlations between SalePrice and all numeric features
+  - Highlights top predictors
+- Feature Exploration Plots
+  - Scatterplots for continuous variables (e.g., `GrLivArea`, `GarageArea`)
+  - Boxplots for ordinal categorical variables (e.g., `OverallQual`, `KitchenQual`)
+  - Each plot includes markdown explanations to guide interpretation
+- Feature Importance Bar Chart
+  - Shows which features the machine learning model relied on most
+  - Based on ExtraTreesRegressor training with feature selection
+
+### 3. Predict House Price (Answers BR2)
+
+- An interactive form where users can enter custom property characteristics to get a predicted sale price.
+- Uses the final trained model pipeline with 5 key features
+- Inputs include both:
+  - Categorical dropdowns with labels (e.g., `KitchenQual`: Ex, Gd, TA…)
+  - Numerical fields with units (e.g., `GrLivArea` [sq ft])
+- Handles data preprocessing and model prediction internally
+- Prediction output is clearly displayed, e.g.:
+  - >🏷️ Estimated Sale Price: US$255,000.00
+- Downloadable `CSV`:
+- Users can export their prediction with one click
+
+### 4. Model Performance
+
+This page provides transparent evaluation of the regression model.
+
+- Evaluation Metrics (Train & Test):
+  - R² Score
+  - Mean Absolute Error (MAE)
+  - Root Mean Squared Error (RMSE)
+- Actual vs Predicted Scatterplots
+  - One plot each for training and test sets
+  - Red reference line shows perfect prediction
+  - Helps users visually assess how accurate the model is
+- Performance Summary
+  - Confirms that model nearly meets or exceeds the target R² ≥ 0.85
+  - Notes model strengths and acceptable prediction variability
+
+Additional Features
+
+- All evaluation metrics and predictions are generated in real time from a consistent pipeline used for both training and deployment.
+- The dashboard is easy to navigate, mobile responsive, and designed for both educational clarity and real-world use.
+Here's a new subsection you can add to your README under the end of **Section 7 – Dashboard Design** or as a new **Section 8 – Running the Dashboard Locally**:
+
+---
+
+### Running the Dashboard Locally
+
+To launch the dashboard on your local machine, follow these steps:
+
+#### Prerequisites
+
+Ensure you have the following installed:
+
+- Python ≥ 3.8
+- pip
+- A virtual environment (recommended)
+- Streamlit:
+
+  ```bash
+  pip install streamlit
+  ```
+
+> ✅ All required dependencies can be found in the project's `requirements.txt` file.
+
+#### Steps to Run the App
+
+1. **Activate your virtual environment**  
+   Navigate to the root directory of your project:
+
+   ```bash
+   cd PP5-heritage-housing-issues-ml
+   ```
+
+2. **Run the Streamlit app**  
+   In the root folder, run:
+
+   ```bash
+   streamlit run app.py
+   ```
+
+3. **View in your browser**  
+   Streamlit will automatically open the app in your default browser.  
+   If not, follow the local URL provided in the terminal (usually `http://localhost:8501`).
+
+---
+
+#### Common Issues
+
+- **Command not found error**: Ensure you are inside the correct folder and have activated the virtual environment.
+- **Port already in use**: Try specifying a different port:
+  
+  ```bash
+  streamlit run app.py --server.port 8502
+  ```
+  
