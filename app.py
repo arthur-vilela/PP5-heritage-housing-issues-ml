@@ -8,6 +8,7 @@ from pathlib import Path
 # === Load artifacts ===
 version = "v1"
 path = Path(__file__).parent / 'outputs' / 'ml_pipeline' / 'predict_house_price' / version
+path_reports = Path(__file__).parent / 'outputs' / 'reports'
 
 # Load pipeline and related artifacts
 pipeline = joblib.load(path / 'pipeline_top5.pkl')
@@ -66,6 +67,63 @@ elif page == "Housing Insights":
 
     st.markdown("These are the features that most influenced the model’s predictions:")
     st.write(pd.DataFrame(model_metrics["feature_importance"]))
+
+    with st.expander("Pandas Profile Report"):
+        st.write("The dataset was analyzed using Pandas Profiling, which provides insights into the data distribution, correlations, and missing values.")
+        # st.image(f"{path}/pandas_profile_report.png", caption="Pandas Profile Report")
+        st.markdown("The report is available for download:")
+        st.markdown("[View Train Set Report](outputs/reports/data_profile_report.html)", unsafe_allow_html=True)
+
+    with st.expander("Key Features"):
+        st.write("""
+                    - **Highly Correlated Features**:
+                        - `GrLivArea` (Above-ground living area): Strong positive correlation with `SalePrice`.
+                        - `GarageArea` (Garage size): Positively correlated, indicating larger garages increase house value.
+                        - `TotalBsmtSF` (Total basement area): Larger basements are associated with higher prices.
+                        - `1stFlrSF` (First-floor square footage): Positively correlated with `SalePrice`.
+                        - `OverallQual` (Overall quality): Strong ordinal feature that significantly impacts `SalePrice`.
+                    - **Temporal Features**:
+                        - `YearBuilt` and `YearRemodAdd`: Newer or recently remodeled homes tend to have higher sale prices.
+                    - **LotFrontage**:
+                        - Indicates the linear feet of street connected to the property. Imputation and analysis suggest it has a moderate impact on `SalePrice`.
+                """)	
+    with st.expander("Feature Engineering"):
+        st.write("""
+                    - **Imputation Strategies**:
+                        - Missing values in features like `GarageYrBlt` and `LotFrontage` were imputed using domain-specific strategies (e.g., median or constant values like `0` or `"None"`).
+                        - Binary flags were added for missing values (e.g., `GarageYrBlt_missing`), which could provide predictive insights.
+                    - **Transformations Applied**:
+                        - Skewed numerical features were transformed to improve normality and reduce outliers:
+                            - `GrLivArea`: Log transformation (`log_e`) reduced right-skew.
+                            - `GarageArea`: Yeo-Johnson transformation improved symmetry.
+                            - `TotalBsmtSF`: Power transformation improved distribution shape.
+                            - `LotFrontage`: Yeo-Johnson transformation smoothed outliers.
+                    - Ordinal encoding was applied to categorical features like `BsmtExposure`, `GarageFinish`, and `KitchenQual`.
+                 """)
+    with st.expander("Multicollinearity and Feature Selection"):
+        st.write("""
+                    - **SmartCorrelatedSelection**:
+                    - The `SmartCorrelatedSelection` technique was used to identify and remove features with high multicollinearity, which can lead to overfitting and reduced model interpretability.
+                        - "SmartCorrelatedSelection" was used with a correlation threshold = 0.8. For more details, refer to [SmartCorrelatedSelection Documentation](https://feature-engine.readthedocs.io/en/latest/selection/SmartCorrelatedSelection.html). Examples include:
+                            - `GarageArea` (correlated with `TotalBsmtSF`).
+                            - `1stFlrSF` (correlated with `GrLivArea`).
+                            - `YearBuilt` and `YearRemodAdd` (correlated with each other).
+                    - **Final Selected Features**:
+                        - The notebook emphasizes retaining features with high predictive power while reducing redundancy. For example:
+                            - ``OverallQual``, ``GrLivArea``, and ``TotalBsmtSF`` were retained due to their strong correlation with `SalePrice`.
+                 """)
+    with st.expander("Missing Data Patterns"):
+        st.write("""
+                    4. Missing Data Patterns
+                    - **Garage Features**:
+                        - Missing values in GarageYrBlt and GarageArea were associated with houses that lack a garage.
+                    - **LotFrontage**:
+                        - Missing values were imputed using the median grouped by Neighborhood, reflecting domain knowledge.
+                 """)
+    with st.expander("SalePrice Distribution"):
+        st.write("""
+                    - The target variable `SalePrice` likely exhibits right-skewness, as transformations like log_e and power were considered for features highly correlated with it. This suggests that higher-priced homes are less frequent in the dataset.
+                """)
 
 # === 3. Predict Price Page ===
 elif page == "Predict Price":

@@ -54,20 +54,6 @@ This dataset provides sufficient structure and detail to build a machine learnin
 
 ---
 
-## Hypotheses
-
-The following hypotheses were formed at the beginning of the project based on common assumptions in real estate and prior knowledge of the Ames housing dataset. These hypotheses will guide our exploratory analysis and help identify which features are most relevant for predicting house prices.
-
-| # | Hypothesis                                                | Validation Method                                           |
-|---|-----------------------------------------------------------|-------------------------------------------------------------|
-| 1 | Houses with higher overall quality tend to sell for more. | Correlation and scatter plot (`OverallQual` vs `SalePrice`) |
-| 2 | Larger above-ground living area leads to higher prices.   | Correlation and scatter plot (`GrLivArea` vs `SalePrice`)   |
-| 3 | Renovated homes command higher prices.                    | Group comparison: `YearBuilt` ≠ `YearRemodAdd`              |
-| 4 | Finished basements increase house value.                  | Group analysis: `BsmtFinType1` vs `SalePrice`               |
-| 5 | Garage size positively affects sale price.                | Correlation and scatter plot (`GarageArea` vs `SalePrice`)  |
-
----
-
 ## Mapping Business Requirements to ML Tasks and Dashboard
 
 | Business Requirement | ML / Data Task              | Dashboard Feature        |
@@ -339,7 +325,7 @@ During the development of the feature engineering, modeling, and dashboard compo
 
 ### ValueError: Could Not Convert String to Float
 
-![ValueError: Could Not Convert String to Float](docs\valueerror-string-to-float-correlation.png)  
+![ValueError: Could Not Convert String to Float](docs/valueerror-string-to-float-correlation.png)  
 **Context:** While computing Pearson correlation, an error was raised due to string values (e.g., 'GLQ') in non-numeric columns.  
 **Fix:** Ensure all columns passed to `.corr()` are numeric by either encoding or dropping object-type columns first.
 
@@ -347,7 +333,7 @@ During the development of the feature engineering, modeling, and dashboard compo
 
 ### ModuleNotFoundError: `pkg_resources` Not Found
 
-![ModuleNotFoundError: pkg_resources Not Found](docs\module-not-found-ppscore.png)
+![ModuleNotFoundError: pkg_resources Not Found](docs/module-not-found-ppscore.png)
 
 **Context:** The `pkg_resources` was installed in the virtual environment where I ran the previous notebooks. So even when the selected kernel was `Python 3.12.8` and not the `venv`, the terminal would indicate that the module was already installed when running `pip install ppscore`.  
 **Fix:** Change the notebooks' kernel to the virtual environment previously created.
@@ -356,7 +342,7 @@ During the development of the feature engineering, modeling, and dashboard compo
 
 ### Input Array Must Be 1 Dimensional
 
-![Input Array Must Be 1 Dimensional](docs\valueerror-arbitrary-discretiser-dimensions.png)  
+![Input Array Must Be 1 Dimensional](docs/valueerror-arbitrary-discretiser-dimensions.png)  
 **Context:** When applying `ArbitraryDiscretiser` to multiple columns, the transformer expected a 1D array.  
 **Fix:** Apply the discretiser to a single column at a time or reshape the input correctly.
 
@@ -364,7 +350,7 @@ During the development of the feature engineering, modeling, and dashboard compo
 
 ### Mime Type Rendering Requires IPython
 
-![Mime Type Rendering Requires IPython](docs\plotly-parallel-categories-render-error.png)  
+![Mime Type Rendering Requires IPython](docs/plotly-parallel-categories-render-error.png)  
 **Context:** Attempting to display Plotly plots in a Jupyter environment without proper renderer configuration.  
 **Fix:** Set `pio.renderers.default = "notebook_connected"` or `"browser"` as fallback in notebooks.
 
@@ -372,7 +358,7 @@ During the development of the feature engineering, modeling, and dashboard compo
 
 ### SmartCorrelatedSelection – Missing Value Error
 
-![SmartCorrelatedSelection – Missing Value Error](docs\smartcorrelatedselection-nan-error.png)  
+![SmartCorrelatedSelection – Missing Value Error](docs/smartcorrelatedselection-nan-error.png)  
 **Context:** Running the modeling pipeline without ensuring all missing values were handled.  
 **Fix:** Double-check that imputation steps occur before correlation or modeling steps.
 
