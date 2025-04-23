@@ -3,16 +3,17 @@ import pandas as pd
 import joblib
 import json
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # === Load artifacts ===
 version = "v1"
-path = f"C:/Users/Arthur/OneDrive/Documentos/Code Institute/PP5/PP5-heritage-housing-issues-ml/outputs/ml_pipeline/predict_house_price/{version}"
+path = Path(__file__).parent / 'outputs' / 'ml_pipeline' / 'predict_house_price' / version
 
-pipeline = joblib.load(f"{path}/pipeline_top5.pkl")
-# pipeline = joblib.load(f"/pipeline_top5.pkl")
-features = joblib.load(f"{path}/feature_list.pkl")
+# Load pipeline and related artifacts
+pipeline = joblib.load(path / 'pipeline_top5.pkl')
+features = joblib.load(path / 'feature_list.pkl')
 
-with open(f"{path}/model_metrics.json", "r") as f:
+with open(path / 'model_metrics.json', "r") as f:
     model_metrics = json.load(f)
 
 # === App Title and Navigation ===
