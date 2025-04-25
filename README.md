@@ -366,6 +366,19 @@ During the development of the feature engineering, modeling, and dashboard compo
 
 ### Dashboard Prediction – Duplicate Inputs and CSV Button Missing
 
-![Dashboard Prediction – Duplicate Inputs and CSV Button Missing](docs/reports/screenshots/streamlit-duplicate-inputs-download-missing.png)  
 **Context:** In the "Predict Price" dashboard page, duplicate inputs appeared, and the download button was visible even before prediction.  
 **Fix:** Use `st.session_state` or conditional blocks to ensure buttons and output appear only after valid input and prediction.
+
+---
+
+## Credits and Acknowledgments
+
+- Custom functions were taken from walkthrough projects in the Predictive Data Analytics specialization course at Code Institute. Such as:
+  - `FeatureEngineeringAnalysis()`
+  - `CalculateCorrAndPPS()`
+  - `DisplayCorrAndPPS()`
+  - `DataCleaningEffect()`
+- Changes and customizations were made depending on the necessity of my project.
+- Small comments were added for my own understanding.
+  
+- My wife, Kyra Sendler, supported me immensily with food, words of encouragement and knowledgeable user testing.
