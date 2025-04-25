@@ -152,7 +152,6 @@ elif page == "Housing Insights":
         st.write("""
                     - **Imputation Strategies**:
                         - Missing values in features like `GarageYrBlt` and `LotFrontage` were imputed using domain-specific strategies (e.g., median or constant values like `0` or `"None"`).
-                        - Binary flags were added for missing values (e.g., `GarageYrBlt_missing`), which could provide predictive insights.
                     - **Transformations Applied**:
                         - Skewed numerical features were transformed to improve normality and reduce outliers:
                             - `GrLivArea`: Log transformation (`log_e`) reduced right-skew.
@@ -178,8 +177,6 @@ elif page == "Housing Insights":
                     4. Missing Data Patterns
                     - **Garage Features**:
                         - Missing values in GarageYrBlt and GarageArea were associated with houses that lack a garage.
-                    - **LotFrontage**:
-                        - Missing values were imputed using the median grouped by Neighborhood, reflecting domain knowledge.
                  """)
     with st.expander("SalePrice Distribution"):
         st.write("""
