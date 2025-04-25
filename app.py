@@ -116,7 +116,7 @@ elif page == "Housing Insights":
             btn = st.download_button(
                 label="📥 Download Pandas Profiling Report in PDF",
                 data=file,
-                file_name="pandas_profiling.pdf",
+                file_name="data_profile_report.pdf",
                 mime="application/pdf"
             )
 
@@ -261,4 +261,4 @@ elif page == "Model Performance":
 
     st.markdown("---")
     st.subheader("Actual vs Predicted Plots")
-    st.image("outputs/ml_pipeline/predict_house_price/v1/regression_scatterplot.png", caption="Actual vs Predicted Scatterplot")
+    st.image("outputs/ml_pipeline/predict_house_price/v2/regression_scatterplot.png", caption="Actual vs Predicted Scatterplot")
