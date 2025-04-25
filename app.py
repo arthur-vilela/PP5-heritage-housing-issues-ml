@@ -104,7 +104,13 @@ elif page == "Housing Insights":
     Higher importance means the model relied more on that feature when making predictions.
     """)
     st.image(f"{path}/feature_importance_top5.png", caption="Top 5 Most Important Features")
-
+    st.markdown("""
+                The most important features are highly connected with the size and quality of the house.
+                The overall quality of the house is the most important feature, indicating that buyers in the area are valuing subjective elements when purchasing a home. 
+                It is followed by the above-ground living area, garage area, total basement area, which makes sense since they form the bulk of the house's total area. 
+                The size of a home is the main information displayed in advertisements alongside location, which can be seen here in this model. 
+                Lastly we have the year the house was remodeled. It can affected the price of the house, as it is a good indicator of how well the house has been maintained and which technologies it has, such as insulation or air conditioning.
+    """)
     st.markdown("These are the features that most influenced the model’s predictions:")
     st.write(pd.DataFrame(model_metrics["feature_importance"]))
 
@@ -196,6 +202,23 @@ elif page == "Predict Price":
     """)
 
     st.markdown("---")
+    st.markdown("### House sales price from client's inherited houses")
+    # Load the dataset of inherited houses
+    inherited_houses_path = Path(__file__).parent / 'inputs' / 'datasets' / 'raw' / 'house-price-20211124T154130Z-001' / 'house-price' / 'inherited_houses.csv'
+    inherited_houses = pd.read_csv(inherited_houses_path)
+
+    # Predict prices for the inherited houses
+    inherited_houses["PredictedPrice"] = pipeline.predict(inherited_houses[features])
+
+    # Display the predictions
+    st.markdown("### Predicted Prices for Inherited Houses:")
+    st.dataframe(inherited_houses[["GrLivArea", "OverallQual", "GarageArea", "TotalBsmtSF", "YearRemodAdd", "PredictedPrice"]])
+
+    # Calculate and display the total predicted price
+    total_price = inherited_houses["PredictedPrice"].sum()
+    st.markdown(f"The sum of predicted prices for the four houses is:🏷️ **US${round(total_price, 2):,}**")
+
+    st.markdown("---")
 
     # Collect user input
     GrLivArea = st.number_input("Above-Ground Living Area (GrLivArea) [sq ft]", min_value=0, value=1500)
@@ -261,4 +284,9 @@ elif page == "Model Performance":
 
     st.markdown("---")
     st.subheader("Actual vs Predicted Plots")
+    st.markdown("### How to Read the Scatterplot")
+    st.info("""
+            - The blue dot indicates the actual value and its predicted value provided by the ML Pipeline for a given datapoint. The red line indicates where the predicted value is the actual value.
+            - Ideally, the blue dots should follow along the red line. We note this iverall trend in the plots velow, for both Train and Test sets. We note there are few datapoints when teh actual price is greater than 500,000, and for these datapoints, the model tends to under estimate the sale price. This is a limitation of the model, as it is not able to predict these values accurately., and 
+    """, icon="ℹ️")
     st.image("outputs/ml_pipeline/predict_house_price/v2/regression_scatterplot.png", caption="Actual vs Predicted Scatterplot")
