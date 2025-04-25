@@ -221,9 +221,9 @@ elif page == "Predict Price":
     st.markdown("---")
 
     # Collect user input
+    GarageArea = st.number_input("Garage Area (GarageArea) [sq ft]", min_value=0, value=400)
     GrLivArea = st.number_input("Above-Ground Living Area (GrLivArea) [sq ft]", min_value=0, value=1500)
     OverallQual = st.selectbox("Overall Quality (OverallQual) [1 = Very Poor, 10 = Excellent]", options=list(range(1, 11)), index=5)
-    GarageArea = st.number_input("Garage Area (GarageArea) [sq ft]", min_value=0, value=400)
     TotalBsmtSF = st.number_input("Total Basement Area (TotalBsmtSF) [sq ft]", min_value=0, value=800)
     YearRemodAdd = st.number_input("Remodel Year (YearRemodAdd)", min_value=1950, max_value=2025, value=2005)
 
@@ -253,7 +253,6 @@ elif page == "Predict Price":
             file_name="house_price_prediction.csv",
             mime="text/csv"
         )
-
 
 # === 4. Model Performance Page ===
 elif page == "Model Performance":
